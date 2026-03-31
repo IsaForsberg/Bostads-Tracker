@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boende-Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Boende-Tracker</h1>
+  </header>
+
+  <main>
+
+    <!-- SORTERING + FAVORITFILTER -->
+    <section id="sort-section">
+      <label for="sort">Sortera efter:</label>
+      <select id="sort">
+        <option value="date">Datum (nyast först)</option>
+        <option value="price">Pris (lägst först)</option>
+        <option value="area">Boarea (störst först)</option>
+        <option value="title">Titel (A–Ö)</option>
+      </select>
+
+      <button id="filter-favorites">Visa favoriter</button>
+    </section>
+
+    <!-- FORMULÄR -->
+    <section id="add-section">
+      <h2>Lägg till nytt objekt</h2>
+      <form id="add-form">
+        <input type="text" id="title" placeholder="Titel / Adress" required>
+        <input type="number" id="price" placeholder="Pris (kr)" required>
+        <input type="number" id="area" placeholder="Boarea (kvm)" required>
+        <input type="url" id="link" placeholder="Länk till annons">
+        <input type="file" id="image" accept="image/*">
+        <textarea id="notes" placeholder="Egna anteckningar"></textarea>
+        <button type="submit">Spara objekt</button>
+      </form>
+    </section>
+
+    <!-- LISTA -->
+    <section id="list-section">
+      <h2>Sparade objekt</h2>
+      <div id="object-list"></div>
+    </section>
+
+    <!-- JÄMFÖRELSE -->
+    <section id="compare-section" class="hidden">
+      <h2>Jämförelse</h2>
+      <div id="compare-container"></div>
+      <button id="close-compare">Stäng jämförelse</button>
+    </section>
+
+  </main>
+
+  <!-- REDIGERA MODAL -->
+  <div id="edit-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Redigera objekt</h2>
+      <form id="edit-form">
+        <input type="text" id="edit-title" required>
+        <input type="number" id="edit-price" required>
+        <input type="number" id="edit-area" required>
+        <input type="url" id="edit-link">
+        <input type="file" id="edit-image" accept="image/*">
+        <textarea id="edit-notes"></textarea>
+        <button type="submit">Spara ändringar</button>
+        <button type="button" id="cancel-edit">Avbryt</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
