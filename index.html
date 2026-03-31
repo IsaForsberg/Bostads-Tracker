@@ -25,6 +25,15 @@
       </select>
 
       <button id="filter-favorites">Visa favoriter</button>
+
+      <label for="type-filter">Boendetyp:</label>
+      <select id="type-filter">
+        <option value="all">Alla typer</option>
+        <option value="Hyresrätt">Hyresrätt</option>
+        <option value="Bostadsrätt">Bostadsrätt</option>
+        <option value="Villa">Villa</option>
+        <option value="Radhus">Radhus</option>
+      </select>
     </section>
 
     <!-- FORMULÄR -->
@@ -35,6 +44,16 @@
         <input type="number" id="price" placeholder="Pris (kr)" required>
         <input type="number" id="area" placeholder="Boarea (kvm)" required>
         <input type="url" id="link" placeholder="Länk till annons">
+
+
+        <select id="type" required>
+          <option value="">Välj boendetyp</option>
+          <option value="Hyresrätt">Hyresrätt</option>
+          <option value="Bostadsrätt">Bostadsrätt</option>
+          <option value="Villa">Villa</option>
+          <option value="Radhus">Radhus</option>
+        </select>
+
         <input type="file" id="image" accept="image/*">
         <textarea id="notes" placeholder="Egna anteckningar"></textarea>
         <button type="submit">Spara objekt</button>
@@ -65,6 +84,14 @@
         <input type="number" id="edit-price" required>
         <input type="number" id="edit-area" required>
         <input type="url" id="edit-link">
+
+        <select id="edit-type" required>
+          <option value="Hyresrätt">Hyresrätt</option>
+          <option value="Bostadsrätt">Bostadsrätt</option>
+          <option value="Villa">Villa</option>
+          <option value="Radhus">Radhus</option>
+        </select>
+
         <input type="file" id="edit-image" accept="image/*">
         <textarea id="edit-notes"></textarea>
         <button type="submit">Spara ändringar</button>
@@ -72,6 +99,7 @@
       </form>
     </div>
   </div>
+
 
   <script src="app.js"></script>
 </body>

@@ -2,6 +2,7 @@ const form = document.getElementById("add-form");
 const list = document.getElementById("object-list");
 const sortSelect = document.getElementById("sort");
 const filterBtn = document.getElementById("filter-favorites");
+const typeFilter = document.getElementById("type-filter");
 
 const compareSection = document.getElementById("compare-section");
 const compareContainer = document.getElementById("compare-container");
@@ -38,6 +39,7 @@ form.addEventListener("submit", async (e) => {
     link: document.getElementById("link").value,
     notes: document.getElementById("notes").value,
     image: imageData,
+    type: document.getElementById("type").value,
     favorite: false,
     date: Date.now()
   };
@@ -51,6 +53,7 @@ form.addEventListener("submit", async (e) => {
 /* ---------------- SORTERING ---------------- */
 
 sortSelect.addEventListener("change", renderList);
+typeFilter.addEventListener("change", renderList);
 
 /* ---------------- FAVORITFILTER ---------------- */
 
@@ -71,9 +74,15 @@ function save() {
 function renderList() {
   list.innerHTML = "";
 
-  let filtered = showFavoritesOnly
-    ? objects.filter(o => o.favorite)
-    : [...objects];
+  let filtered = [...objects];
+
+    if (showFavoritesOnly) {
+      filtered = filtered.filter(o => o.favorite);
+    }
+
+    if (typeFilter.value !== "all") {
+      filtered = filtered.filter(o => o.type === typeFilter.value);
+    }
 
   switch (sortSelect.value) {
     case "price":
@@ -99,6 +108,7 @@ function renderList() {
       ${obj.image ? `<img src="${obj.image}" alt="Bild">` : ""}
 
       <h3>${obj.title}</h3>
+       <p><strong>Typ:</strong> ${obj.type}</p>
       <p><strong>Pris:</strong> ${obj.price.toLocaleString()} kr</p>
       <p><strong>Boarea:</strong> ${obj.area} kvm</p>
       ${obj.link ? `<a href="${obj.link}" target="_blank">Öppna annons</a>` : ""}
@@ -147,6 +157,7 @@ function showComparison() {
     card.innerHTML = `
       ${obj.image ? `<img src="${obj.image}" alt="Bild">` : ""}
       <h3>${obj.title}</h3>
+      <p><strong>Typ:</strong> ${obj.type}</p>
       <p><strong>Pris:</strong> ${obj.price.toLocaleString()} kr</p>
       <p><strong>Boarea:</strong> ${obj.area} kvm</p>
       <p><strong>Pris/kvm:</strong> ${(obj.price / obj.area).toFixed(0)} kr</p>
@@ -182,6 +193,7 @@ function openEdit(id) {
   document.getElementById("edit-area").value = obj.area;
   document.getElementById("edit-link").value = obj.link;
   document.getElementById("edit-notes").value = obj.notes;
+  document.getElementById("edit-type").value = obj.type;
 
   editModal.classList.remove("hidden");
 }
@@ -200,6 +212,7 @@ editForm.addEventListener("submit", async (e) => {
   obj.area = Number(document.getElementById("edit-area").value);
   obj.link = document.getElementById("edit-link").value;
   obj.notes = document.getElementById("edit-notes").value;
+  obj.type = document.getElementById("edit-type").value;
 
   const newImage = document.getElementById("edit-image").files[0];
   if (newImage) obj.image = await toBase64(newImage);
